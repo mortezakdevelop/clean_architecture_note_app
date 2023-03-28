@@ -178,6 +178,13 @@ class HomeFragment : Fragment(),NavigationView.OnNavigationItemSelectedListener 
             //Toast.makeText(requireContext(),"prorile",Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.action_homeFragment_to_profileFragment2)
         }
+        if(item.itemId == R.id.exit){
+            requireActivity().finish()
+        }
+
+        if (item.itemId == R.id.settingFragment2){
+            findNavController().navigate(R.id.action_homeFragment_to_settingFragment2)
+        }
 //        binding.navView.setBackgroundColor(resources.getColor(R.color.white))
         return true
     }

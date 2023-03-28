@@ -6,16 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.noteappcleanarchitecture.R
-import com.example.noteappcleanarchitecture.databinding.FragmentProfileBinding
+import com.example.noteappcleanarchitecture.databinding.FragmentSettingBinding
 
-class ProfileFragment : Fragment() {
-    private lateinit var fragmentProfileBinding: FragmentProfileBinding
+class SettingFragment : Fragment() {
+
+    private lateinit var fragmentSettingBinding:FragmentSettingBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        fragmentProfileBinding = FragmentProfileBinding.inflate(layoutInflater,container,false)
-        return fragmentProfileBinding.root
+
+        fragmentSettingBinding = FragmentSettingBinding.inflate(layoutInflater,container,false)
+        return fragmentSettingBinding.root
     }
+
 }

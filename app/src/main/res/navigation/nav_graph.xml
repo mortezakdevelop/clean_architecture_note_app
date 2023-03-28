@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment2"
             app:destination="@id/profileFragment2" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingFragment2"
+            app:destination="@id/settingFragment2" />
     </fragment>
     <dialog
         android:id="@+id/noteFragment"
@@ -31,4 +34,9 @@
         android:name="com.example.noteappcleanarchitecture.presentation.ui.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/settingFragment2"
+        android:name="com.example.noteappcleanarchitecture.presentation.ui.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
 </navigation>

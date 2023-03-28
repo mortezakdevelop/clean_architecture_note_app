@@ -17,4 +17,10 @@
     <string name="mail">Email</string>
     <string name="firstname">First Name</string>
     <string name="change_photo">Change photo</string>
+    <string name="setting">Setting</string>
+    <string name="about_us">About us</string>
+    <string name="privacy">PrivacyPolicy</string>
+    <string name="exit">Exit</string>
+    <string name="darkmode">DarkMode</string>
+    <string name="language">Language</string>
 </resources>
