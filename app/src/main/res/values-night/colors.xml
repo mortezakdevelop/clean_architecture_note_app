@@ -21,6 +21,5 @@
     <color name="yellow">#FFC107</color>
     <color name="green">#2fdf84</color>
     <color name="light_green">#40FA5E</color>
-    <color name="toolbarColor">@color/white</color>
-
+    <color name="toolbarColor">@color/black</color>
 </resources>

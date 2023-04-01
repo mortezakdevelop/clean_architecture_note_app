@@ -60,6 +60,7 @@ class HomeFragment : Fragment(),NavigationView.OnNavigationItemSelectedListener 
             addNoteBtn.setOnClickListener {
                 NoteFragment().show(parentFragmentManager, NoteFragment().tag)
             }
+
         }
         //Get data
         viewModel.getAll()
