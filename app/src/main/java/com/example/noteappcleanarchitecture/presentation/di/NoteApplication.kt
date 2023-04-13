@@ -10,11 +10,12 @@ class NoteApplication: Application() {
 
     private lateinit var sharedPreferences: SharedPreferences
     private var nightMode = 0
-    
+
     override fun onCreate() {
         super.onCreate()
         sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE)
         nightMode = sharedPreferences.getInt("NightModeInt", 1)
         AppCompatDelegate.setDefaultNightMode(nightMode)
     }
+
 }

@@ -11,14 +11,15 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.util.Base64
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import com.example.noteappcleanarchitecture.R
 import com.example.noteappcleanarchitecture.databinding.FragmentProfileBinding
+import com.example.noteappcleanarchitecture.databinding.HeaderDrawerLayoutBinding
 import com.google.android.material.snackbar.Snackbar
 import java.io.ByteArrayOutputStream
 

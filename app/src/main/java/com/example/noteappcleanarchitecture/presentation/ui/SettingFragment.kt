@@ -9,10 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.noteappcleanarchitecture.BuildConfig
+import com.example.noteappcleanarchitecture.data.utils.FIRST_START
+import com.example.noteappcleanarchitecture.data.utils.NIGHT_MODE
 import com.example.noteappcleanarchitecture.databinding.FragmentSettingBinding
-import kotlinx.coroutines.flow.callbackFlow
+
 
 class SettingFragment : Fragment() {
     private lateinit var fragmentSettingBinding: FragmentSettingBinding
@@ -29,14 +30,17 @@ class SettingFragment : Fragment() {
 
         fragmentSettingBinding = FragmentSettingBinding.inflate(layoutInflater, container, false)
 
+        showVersionCode()
+        return fragmentSettingBinding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
         // Save switch state in shared preferences
         val sharedPreferences2: SharedPreferences =
             requireContext().getSharedPreferences("save", MODE_PRIVATE)
         fragmentSettingBinding.switcher.isChecked = sharedPreferences2.getBoolean("value", true)
-
         handleMode()
-        showVersionCode()
-        return fragmentSettingBinding.root
     }
 
     private fun showVersionCode() {
@@ -59,7 +63,7 @@ class SettingFragment : Fragment() {
         if (nightMode) {
             fragmentSettingBinding.switcher.isChecked = true
         }
-
+//
         fragmentSettingBinding.switcher.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

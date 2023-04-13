@@ -22,5 +22,9 @@
     <color name="green">#2fdf84</color>
     <color name="light_green">#40FA5E</color>
     <color name="toolbarColor">@color/white</color>
+    <color name="backgroundColor">@color/white</color>
+    <color name="textColorBackground">@color/black</color>
+
+
 
 </resources>

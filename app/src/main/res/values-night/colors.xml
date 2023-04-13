@@ -19,7 +19,9 @@
     <color name="red">#E91E63</color>
     <color name="aqua">#00BCD4</color>
     <color name="yellow">#FFC107</color>
-    <color name="green">#2fdf84</color>
+    <color name="green">#006D35</color>
     <color name="light_green">#40FA5E</color>
     <color name="toolbarColor">@color/black</color>
+    <color name="backgroundColor">#0E0E0E</color>
+    <color name="textColorBackground">@color/grayLight</color>
 </resources>

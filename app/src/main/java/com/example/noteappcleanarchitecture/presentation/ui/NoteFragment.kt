@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.noteappcleanarchitecture.R
 import com.example.noteappcleanarchitecture.data.entity.NoteEntity
 import com.example.noteappcleanarchitecture.data.utils.*
 import com.example.noteappcleanarchitecture.databinding.FragmentNoteBinding
@@ -33,8 +35,14 @@ class NoteFragment : BottomSheetDialogFragment() {
     private val categoriesList: MutableList<String> = mutableListOf()
     private val prioriesList: MutableList<String> = mutableListOf()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogStyle)
+
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentNoteBinding.inflate(layoutInflater)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogStyle)
         return binding.root
     }
 

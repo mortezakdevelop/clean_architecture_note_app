@@ -19,3 +19,7 @@ const val EDIT = "edit"
 const val NEW = "new"
 
 const val BUNDLE_ID = "bundle_id"
+
+const val FIRST_START = "FirstStart"
+const val NIGHT_MODE = "NightMode"
+const val PREF = "AppSettingsPrefs"
