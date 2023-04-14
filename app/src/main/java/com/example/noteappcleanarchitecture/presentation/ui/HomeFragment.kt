@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.noteappcleanarchitecture.R
 import com.example.noteappcleanarchitecture.data.entity.NoteEntity
@@ -62,6 +63,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         binding.notesToolbar.title = ""
         //initDrawerLayout()
         headerDrawerLayoutBinding = HeaderDrawerLayoutBinding.bind(binding.navView.getHeaderView(0));
+        hideFabButtonScrolling()
         return binding.root
     }
 
@@ -234,7 +236,23 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         if (item.itemId == R.id.settingFragment2) {
             findNavController().navigate(R.id.action_homeFragment_to_settingFragment2)
         }
-//        binding.navView.setBackgroundColor(resources.getColor(R.color.white))
         return true
+    }
+
+    private fun hideFabButtonScrolling(){
+        binding.noteList.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if(dy>0 || dy<0 && binding.addNoteBtn.isShown){
+                    binding.addNoteBtn.hide()
+                }
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                binding.addNoteBtn.show()
+            }
+
+        })
     }
 }
