@@ -23,5 +23,8 @@
     <color name="light_green">#40FA5E</color>
     <color name="toolbarColor">@color/black</color>
     <color name="backgroundColor">#0E0E0E</color>
+    <color name="dark_green">#1C1F00</color>
+    <color name="category_background">#191919</color>
+    <color name="spinner_background">@color/dark_gray</color>
     <color name="textColorBackground">@color/grayLight</color>
 </resources>

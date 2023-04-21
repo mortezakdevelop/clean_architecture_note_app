@@ -39,7 +39,7 @@ class SettingFragment : Fragment() {
         // Save switch state in shared preferences
         val sharedPreferences2: SharedPreferences =
             requireContext().getSharedPreferences("save", MODE_PRIVATE)
-        fragmentSettingBinding.switcher.isChecked = sharedPreferences2.getBoolean("value", true)
+        fragmentSettingBinding.switcher.isChecked = sharedPreferences2.getBoolean("value", false)
         handleMode()
     }
 
