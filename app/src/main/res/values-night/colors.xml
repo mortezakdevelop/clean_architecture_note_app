@@ -27,4 +27,6 @@
     <color name="category_background">#191919</color>
     <color name="spinner_background">@color/dark_gray</color>
     <color name="textColorBackground">@color/grayLight</color>
+    <color name ="viewColorBackground">@color/dark_gray</color>
+
 </resources>

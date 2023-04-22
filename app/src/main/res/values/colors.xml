@@ -27,6 +27,7 @@
     <color name="category_background">@color/grayLight</color>
     <color name="spinner_background">@color/white</color>
     <color name="textColorBackground">@color/black</color>
+    <color name ="viewColorBackground">@color/dark_gray</color>
 
 
 
