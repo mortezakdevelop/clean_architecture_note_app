@@ -9,7 +9,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,7 +26,7 @@ class HomeViewModel @Inject constructor(
     val getAllNotes = _getAllNotes.asStateFlow()
 
     private val _searchNotes : MutableStateFlow<DataStatus<List<NoteEntity>>?> = MutableStateFlow(null)
-    val searchNotes = _searchNotes.asStateFlow()
+    val searchNotes:StateFlow<DataStatus<List<NoteEntity>>?> = _searchNotes
 
     fun getAll() = viewModelScope.launch {
         allNoteUseCase.getAllNote().collect{
@@ -33,8 +35,8 @@ class HomeViewModel @Inject constructor(
     }
 
     fun searchNote(search : String) = viewModelScope.launch {
-        searchUseCase.searchNote(search).collect{
-            _searchNotes.value = DataStatus.success(it,it.isEmpty())
+        searchUseCase.searchNote(search).collect{ note ->
+            _searchNotes.update { DataStatus.success(note,note.isEmpty()) }
         }
     }
 
