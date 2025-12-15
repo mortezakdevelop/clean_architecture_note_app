@@ -9,10 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import com.example.noteappcleanarchitecture.BuildConfig
 import com.example.noteappcleanarchitecture.data.utils.FIRST_START
 import com.example.noteappcleanarchitecture.data.utils.NIGHT_MODE
 import com.example.noteappcleanarchitecture.databinding.FragmentSettingBinding
+import com.makeramen.roundedimageview.BuildConfig
 
 
 class SettingFragment : Fragment() {
