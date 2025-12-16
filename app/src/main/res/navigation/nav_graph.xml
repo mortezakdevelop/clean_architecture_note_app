@@ -41,7 +41,7 @@
         tools:layout="@layout/fragment_setting" />
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.example.noteappcleanarchitecture.presentation.ui.SplashScreenFragment"
+        android:name="com.example.noteappcleanarchitecture.presentation.ui.splash.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action
