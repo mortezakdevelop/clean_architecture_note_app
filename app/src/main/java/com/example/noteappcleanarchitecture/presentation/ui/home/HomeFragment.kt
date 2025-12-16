@@ -1,40 +1,37 @@
-package com.example.noteappcleanarchitecture.presentation.ui
+package com.example.noteappcleanarchitecture.presentation.ui.home
 
-import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Base64
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.GravityCompat
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.noteappcleanarchitecture.R
 import com.example.noteappcleanarchitecture.data.entity.NoteEntity
 import com.example.noteappcleanarchitecture.data.utils.BUNDLE_ID
 import com.example.noteappcleanarchitecture.data.utils.DELETE
 import com.example.noteappcleanarchitecture.data.utils.EDIT
-import com.example.noteappcleanarchitecture.databinding.FragmentHomeBinding
 import com.example.noteappcleanarchitecture.databinding.HeaderDrawerLayoutBinding
 import com.example.noteappcleanarchitecture.presentation.adapter.NoteAdapter
+import com.example.noteappcleanarchitecture.presentation.ui.NoteFragment
 import com.example.noteappcleanarchitecture.presentation.viewmodel.HomeViewModel
-import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
-class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener {
-    private lateinit var binding: FragmentHomeBinding
+class HomeFragment : Fragment() {
+    //private lateinit var binding: FragmentHomeBinding
     lateinit var headerDrawerLayoutBinding: HeaderDrawerLayoutBinding
 
 
@@ -59,18 +56,29 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
-        binding.notesToolbar.title = ""
-        //initDrawerLayout()
-        headerDrawerLayoutBinding = HeaderDrawerLayoutBinding.bind(binding.navView.getHeaderView(0));
-        hideFabButtonScrolling()
-        return binding.root
+        return ComposeView(requireContext()).apply {
+            setContent {
+                HomeRoute(
+                    onAddNote = {
+                        NoteFragment().show(parentFragmentManager, NoteFragment().tag)
+                    },
+                    onEditNote = { id ->
+                        val noteFragment = NoteFragment()
+                        noteFragment.arguments = Bundle().apply { putInt(BUNDLE_ID, id) }
+                        noteFragment.show(parentFragmentManager, NoteFragment().tag)
+                    },
+                    onDeleteNote = { entity ->
+                        viewModel.deleteNote(entity)
+                    }
+                )
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        (activity as AppCompatActivity).setSupportActionBar(binding.notesToolbar)
+        /*(activity as AppCompatActivity).setSupportActionBar(binding.notesToolbar)
         //InitViews
         binding.apply {
             //Note fragment
@@ -78,24 +86,24 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 NoteFragment().show(parentFragmentManager, NoteFragment().tag)
             }
 
-        }
+        }*/
         //Get data
         viewModel.getAll()
         lifecycleScope.launchWhenCreated {
             viewModel.getAllNotes.collectLatest {
                 if (it != null) {
-                    showEmpty(it.isEmpty)
+                    //showEmpty(it.isEmpty)
                 }
                 if (it != null) {
                     it.data?.let { itData ->
                         notesAdapter.setData(itData)
                     }
                 }
-                binding.noteList.apply {
+             /*   binding.noteList.apply {
                     layoutManager =
                         StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                     adapter = notesAdapter
-                }
+                }*/
             }
         }
 
@@ -103,18 +111,18 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         lifecycleScope.launchWhenCreated {
             viewModel.searchNotes.collectLatest {
                 if (it != null) {
-                    showEmpty(it.isEmpty)
+                    //showEmpty(it.isEmpty)
                 }
                 if (it != null) {
                     it.data?.let { itData ->
                         notesAdapter.setData(itData)
                     }
                 }
-                binding.noteList.apply {
+              /*  binding.noteList.apply {
                     layoutManager =
                         StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                     adapter = notesAdapter
-                }
+                }*/
             }
         }
 
@@ -140,7 +148,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         }
     }
 
-    private fun initDrawerLayout() {
+/*    private fun initDrawerLayout() {
         navigationDrawer = ActionBarDrawerToggle(
             requireActivity(),
             binding.drawerLayout,
@@ -156,7 +164,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         binding.drawerLayout.setViewElevation(Gravity.START, 20f)
 
         initHeaderDrawerLayout()
-    }
+    }*/
 
     private fun initHeaderDrawerLayout() {
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(requireActivity())
@@ -189,6 +197,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.size)
     }
 
+/*
     private fun showEmpty(isShown: Boolean) {
         binding.apply {
             if (isShown) {
@@ -200,6 +209,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             }
         }
     }
+*/
 
 
     @Deprecated("Deprecated in Java")
@@ -208,7 +218,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         val search = menu.findItem(R.id.actionSearch)
         val searchView = search.actionView as SearchView
         searchView.queryHint = getString(R.string.search)
-        initDrawerLayout()
+        //initDrawerLayout()
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -223,7 +233,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+/*    override fun onNavigationItemSelected(item: MenuItem): Boolean {
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         if (item.itemId == R.id.profileFragment2) {
             //Toast.makeText(requireContext(),"prorile",Toast.LENGTH_LONG).show()
@@ -237,9 +247,9 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             findNavController().navigate(R.id.action_homeFragment_to_settingFragment2)
         }
         return true
-    }
+    }*/
 
-    private fun hideFabButtonScrolling(){
+/*    private fun hideFabButtonScrolling(){
         binding.noteList.addOnScrollListener(object: RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -254,5 +264,5 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             }
 
         })
-    }
+    }*/
 }
